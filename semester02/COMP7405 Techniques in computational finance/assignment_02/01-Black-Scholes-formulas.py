@@ -1,14 +1,8 @@
 import numpy as np
 from scipy.stats import norm
 
-# Data
 # σ = sigma
 # δ = delta
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 1%.
-# S = 50, K = 60, t = 0, T = 0:5, sigma = 20%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 1:0, sigma = 20%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 30%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 2%.
 
 # S = Current stock price
 # N(d1) and N(d2) = Cumulative density function
@@ -46,3 +40,55 @@ def black_scholes_put(S, K, t, T, r, sigma):
     # Put Option
     # P(S,t) = Ke^(-r(T - t)) * N(-d2) - SN(-d1)
     return K * np.exp(-r * (T - t)) * norm.cdf(-(d2(S, K, t, T, r, sigma))) - (S * norm.cdf(-(d1(S, K, t, T, r, sigma))))
+
+# Data
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 1%.
+# S = 50, K = 60, t = 0, T = 0:5, sigma = 20%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 1:0, sigma = 20%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 30%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 2%.
+
+data = [
+  {
+    "S": 50,
+    "K": 50,
+    "t": 0,
+    "T": 0.5,
+    "sigma": 0.2,
+    "r": 0.01
+  },
+  {
+    "S": 50,
+    "K": 60,
+    "t": 0,
+    "T": 0.5,
+    "sigma": 0.2,
+    "r": 0.01
+  },
+  {
+    "S": 50,
+    "K": 50,
+    "t": 0,
+    "T": 1,
+    "sigma": 0.2,
+    "r": 0.01
+  },
+  {
+    "S": 50,
+    "K": 50,
+    "t": 0,
+    "T": 0.5,
+    "sigma": 0.3,
+    "r": 0.01
+  },
+  {
+    "S": 50,
+    "K": 50,
+    "t": 0,
+    "T": 0.5,
+    "sigma": 0.2,
+    "r": 0.02
+  },
+]
+
+print("Call Option: {} {}".format(1, 2))
