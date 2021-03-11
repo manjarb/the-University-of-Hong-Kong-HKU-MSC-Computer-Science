@@ -1,6 +1,58 @@
 import numpy as np
 from scipy.stats import norm
 
+
+# 1. (2 marks) Implement the Black-Scholes formulas for C(S; t) and P(S; t),
+# and calculate the values of both call and put options with following parameters:
+# Data
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 1%.
+# S = 50, K = 60, t = 0, T = 0:5, sigma = 20%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 1:0, sigma = 20%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 30%, and r = 1%.
+# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 2%.
+data = [
+    {
+        "S": 50,
+        "K": 50,
+        "t": 0,
+        "T": 0.5,
+        "sigma": 0.2,
+        "r": 0.01
+    },
+    {
+        "S": 50,
+        "K": 60,
+        "t": 0,
+        "T": 0.5,
+        "sigma": 0.2,
+        "r": 0.01
+    },
+    {
+        "S": 50,
+        "K": 50,
+        "t": 0,
+        "T": 1,
+        "sigma": 0.2,
+        "r": 0.01
+    },
+    {
+        "S": 50,
+        "K": 50,
+        "t": 0,
+        "T": 0.5,
+        "sigma": 0.3,
+        "r": 0.01
+    },
+    {
+        "S": 50,
+        "K": 50,
+        "t": 0,
+        "T": 0.5,
+        "sigma": 0.2,
+        "r": 0.02
+    },
+]
+
 # σ = sigma
 # δ = delta
 
@@ -14,7 +66,6 @@ from scipy.stats import norm
 # e = 2.71828
 # delta = Annual dividend yield of underlying stock
 # sigma = Annualised standard deviation of share returns or Volatility
-
 
 def d1(S, K, t, T, r, sigma):
     # d1 = ((ln(S / K) + (r + (sigma^2 / 2)) * (T - t)) / (sigma * √T-t)
@@ -41,54 +92,16 @@ def black_scholes_put(S, K, t, T, r, sigma):
     # P(S,t) = Ke^(-r(T - t)) * N(-d2) - SN(-d1)
     return K * np.exp(-r * (T - t)) * norm.cdf(-(d2(S, K, t, T, r, sigma))) - (S * norm.cdf(-(d1(S, K, t, T, r, sigma))))
 
-# Data
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 1%.
-# S = 50, K = 60, t = 0, T = 0:5, sigma = 20%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 1:0, sigma = 20%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 30%, and r = 1%.
-# S = 50, K = 50, t = 0, T = 0:5, sigma = 20%, and r = 2%.
 
-data = [
-  {
-    "S": 50,
-    "K": 50,
-    "t": 0,
-    "T": 0.5,
-    "sigma": 0.2,
-    "r": 0.01
-  },
-  {
-    "S": 50,
-    "K": 60,
-    "t": 0,
-    "T": 0.5,
-    "sigma": 0.2,
-    "r": 0.01
-  },
-  {
-    "S": 50,
-    "K": 50,
-    "t": 0,
-    "T": 1,
-    "sigma": 0.2,
-    "r": 0.01
-  },
-  {
-    "S": 50,
-    "K": 50,
-    "t": 0,
-    "T": 0.5,
-    "sigma": 0.3,
-    "r": 0.01
-  },
-  {
-    "S": 50,
-    "K": 50,
-    "t": 0,
-    "T": 0.5,
-    "sigma": 0.2,
-    "r": 0.02
-  },
-]
-
-print("Call Option: {} {}".format(1, 2))
+for stock in data:
+    print("Stock data: {}".format(stock))
+    S = stock["S"]
+    K = stock["K"]
+    t = stock["t"]
+    T = stock["T"]
+    r = stock["r"]
+    sigma = stock["sigma"]
+    print("Call option price: {}".format(
+        black_scholes_call(S, K, t, T, r, sigma)))
+    print("Put option price: {}".format(
+        black_scholes_put(S, K, t, T, r, sigma)))
