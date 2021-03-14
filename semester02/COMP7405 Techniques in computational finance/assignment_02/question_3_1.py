@@ -56,7 +56,7 @@ def call_put_parity(S, K, t, T, r, q):
 # ==========================================================================
 
 
-def calculate_implied_volatility(S, K, t, T, r, q, option_type, sigma_true):
+def calculate_implied_volatility(S, K, t, T, r, q, option_type, C_true):
     time = T - t
     # The initial guess σ^ changes to:
     #
@@ -67,13 +67,16 @@ def calculate_implied_volatility(S, K, t, T, r, q, option_type, sigma_true):
     sigma_diff = 1
     n = 1
     sigma = sigma_hat
-    C_true = black_scholes_call(S, K, t, T, r, q, sigma_true) if option_type == 'C' else black_scholes_put(
-        S, K, t, T, r, q, sigma_true)
+    # C_true = black_scholes_call(S, K, t, T, r, q, sigma_true) if option_type == 'C' else black_scholes_put(S, K, t, T, r, q, sigma_true)
 
     while (sigma_diff >= tol and n < nmax):
         C = black_scholes_call(S, K, t, T, r, q, sigma) if option_type == 'C' else black_scholes_put(
             S, K, t, T, r, q, sigma)
         Cvega = black_scholes_vega(S, K, t, T, r, q, sigma)
+
+        if Cvega == 0:
+            return np.nan
+
         increment = (C - C_true) / Cvega
         sigma = sigma - increment
         n = n+1
