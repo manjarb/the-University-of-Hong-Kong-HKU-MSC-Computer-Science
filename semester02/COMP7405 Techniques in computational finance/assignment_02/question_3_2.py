@@ -20,7 +20,7 @@ def create_date(date_time_string):
 with open('./marketdata.csv') as csv_file:
     for row in csv.DictReader(csv_file, skipinitialspace=True):
         local_time = convert_local_time(row['LocalTime'])
-        if local_time == '09:31:00' or local_time == '09:32:00' or local_time == '09:33:00' or row['Symbol'] == '510050':
+        if local_time == '09:30:00' or local_time == '09:31:00' or local_time == '09:32:00' or row['Symbol'] == '510050':
             d_row = {}
             for key, value in row.items():
                 if (key != 'LocalTime' and key != 'Symbol'):
@@ -71,8 +71,7 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
     r = 0.04  # 4%
     # Time to maturity
     T = (24 - 16) / 365
-    # TODO confirm sigma_true value later
-    sigma_true = 0.3
+
     # Sample {'LocalTime': '2016-Feb-16 09:32:00.907981', 'Symbol': 10000566.0, 'Last': 0.0027, 'Bid1': 0.0026, 'BidQty1': 1.0, 'Ask1': 0.0035, 'AskQty1': 6.0}
     for index, market in enumerate(market_data):
         # Sample {'Type': 'Option', 'Symbol': 10000566.0, 'Expiry': 20160224.0, 'Strike': 1.8, 'OptionType': 'P'}
@@ -125,13 +124,13 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
                 'LocalTime': market['LocalTime'],
             }
 
-        if local_time == '09:31:00':
+        if local_time == '09:30:00':
             options_31.append(data)
 
-        if local_time == '09:32:00':
+        if local_time == '09:31:00':
             options_32.append(data)
 
-        if local_time == '09:33:00':
+        if local_time == '09:32:00':
             options_33.append(data)
 
     if len(options_31) > 0:
@@ -139,7 +138,7 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
             wr = csv.DictWriter(
                 f, delimiter=",", fieldnames=list(options_31[0].keys()))
             wr.writeheader()
-            wr.writerows(options_32)
+            wr.writerows(options_31)
 
     if len(options_32) > 0:
         with open("32.csv", "w") as f:
