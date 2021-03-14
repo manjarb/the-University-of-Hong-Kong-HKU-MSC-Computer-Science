@@ -45,11 +45,6 @@ def black_scholes_vega(S, K, t, T, r, q, sigma):
     return S * np.exp(-q * (time)) * np.sqrt(time) * norm.pdf(d1)
 
 
-def call_put_parity(S, K, t, T, r, q):
-    # Se^(-q(T - t)) - Ke^(-r(T - t))
-    time = T - t
-    return (S * np.exp(-q * (time))) - (K * np.exp(-r * (time)))
-
 # (3.1)
 # Implement the algorithm presented in Lecture 4 to calculate implied volatilities
 # with the extended Black-Scholes formulas (1)-(2).

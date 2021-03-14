@@ -16,6 +16,17 @@ def create_date(date_time_string):
     return datetime.strptime(
         date_time_string, '%Y-%b-%d %H:%M:%S.%f')
 
+with open('./instruments.csv') as csv_file:
+    for row in csv.DictReader(csv_file, skipinitialspace=True):
+        d_row = {}
+        for key, value in row.items():
+            if (key != 'Type' and key != 'OptionType' and key != 'Symbol' and value != ''):
+                d_row[key] = float(value)
+            else:
+                d_row[key] = value
+
+        instruments_data.append(d_row)
+
 
 with open('./marketdata.csv') as csv_file:
     for row in csv.DictReader(csv_file, skipinitialspace=True):
@@ -31,16 +42,6 @@ with open('./marketdata.csv') as csv_file:
             market_data.append(d_row)
 
 
-with open('./instruments.csv') as csv_file:
-    for row in csv.DictReader(csv_file, skipinitialspace=True):
-        d_row = {}
-        for key, value in row.items():
-            if (key != 'Type' and key != 'OptionType' and key != 'Symbol' and value != ''):
-                d_row[key] = float(value)
-            else:
-                d_row[key] = value
-
-        instruments_data.append(d_row)
 
 
 # (3.2)
@@ -104,23 +105,27 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
             ask_implied_volatility) else ask_implied_volatility
 
         if option['OptionType'] == 'P':
-            # Calculate Bid Volatility
+            # Calculate Implied Volatility
             data = {
                 'Strike': K,
                 'BidVolP': bid_implied_volatility,
                 'AskVolP': ask_implied_volatility,
                 'BidVolC': '',
                 'AskVolC': '',
+                'BidQty1': market['BidQty1'],
+                'AskQty1': market['AskQty1'],
                 'LocalTime': market['LocalTime'],
             }
         if option['OptionType'] == 'C':
-            # Calculate Bid Volatility
+            # Calculate Implied Volatility
             data = {
                 'Strike': K,
                 'BidVolP': '',
                 'AskVolP': '',
                 'BidVolC': bid_implied_volatility,
                 'AskVolC': ask_implied_volatility,
+                'BidQty1': market['BidQty1'],
+                'AskQty1': market['AskQty1'],
                 'LocalTime': market['LocalTime'],
             }
 
