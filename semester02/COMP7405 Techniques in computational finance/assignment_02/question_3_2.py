@@ -16,6 +16,7 @@ def create_date(date_time_string):
     return datetime.strptime(
         date_time_string, '%Y-%b-%d %H:%M:%S.%f')
 
+
 with open('./instruments.csv') as csv_file:
     for row in csv.DictReader(csv_file, skipinitialspace=True):
         d_row = {}
@@ -31,17 +32,14 @@ with open('./instruments.csv') as csv_file:
 with open('./marketdata.csv') as csv_file:
     for row in csv.DictReader(csv_file, skipinitialspace=True):
         local_time = convert_local_time(row['LocalTime'])
-        if local_time == '09:30:00' or local_time == '09:31:00' or local_time == '09:32:00' or row['Symbol'] == '510050':
-            d_row = {}
-            for key, value in row.items():
-                if (key != 'LocalTime' and key != 'Symbol'):
-                    d_row[key] = float(value)
-                else:
-                    d_row[key] = value
+        d_row = {}
+        for key, value in row.items():
+            if (key != 'LocalTime' and key != 'Symbol'):
+                d_row[key] = float(value)
+            else:
+                d_row[key] = value
 
-            market_data.append(d_row)
-
-
+        market_data.append(d_row)
 
 
 # (3.2)
@@ -63,101 +61,117 @@ with open('./marketdata.csv') as csv_file:
 # Strike | BidVolP | AskVolP | BidVolC | AskVolC
 #   1.9  |  ....   |  ....   |  ....   |  ....
 
+def compute_latest_data(data_list, exit_key, exit_value, spot_key, spot_value):
+    result = []
+    for index, data in enumerate(data_list):
+        exit_time = convert_local_time(data[exit_key])
+        result_index = next((index for (index, d) in enumerate(
+            result) if d["Symbol"] == data['Symbol']), None)
 
-def calculate_bid_ask_implied_volatilities_all_instruments():
-    options_31 = []
-    options_32 = []
-    options_33 = []
-    q = 0.2  # 20%
-    r = 0.04  # 4%
-    # Time to maturity
-    T = (24 - 16) / 365
+        if result_index is None:
+            result.append(data)
+        else:
+            result.pop(result_index)
+            result.append(data)
 
+        if exit_time == exit_value:
+            break
+
+    last_spot_index = 0
+    for index, value in enumerate(result):
+        if value[spot_key] == spot_value:
+            last_spot_index = index
+
+    result = result[:(last_spot_index + 1)]
+
+    return result
+
+
+def compute_implied_volatility(data, instruments, T, r, q):
     # Sample {'LocalTime': '2016-Feb-16 09:32:00.907981', 'Symbol': 10000566.0, 'Last': 0.0027, 'Bid1': 0.0026, 'BidQty1': 1.0, 'Ask1': 0.0035, 'AskQty1': 6.0}
-    for index, market in enumerate(market_data):
-        # Sample {'Type': 'Option', 'Symbol': 10000566.0, 'Expiry': 20160224.0, 'Strike': 1.8, 'OptionType': 'P'}
-        option = next(
-            filter(lambda v: v['Symbol'] == market['Symbol'], instruments_data), None)
+    implied_volatility = []
+    equity_price = data[-1]
+    for index, market in enumerate(data):
+        instrument = next(
+            filter(lambda v: v['Symbol'] == market['Symbol'], instruments), None)
 
-        equity_symbol = next(
-            filter(lambda v: v['Type'] == 'Equity', instruments_data), None)
-
-        local_time = convert_local_time(market['LocalTime'])
-
-        equity_price = 0
-        for index_eq, market_eq in enumerate(market_data):
-            if index_eq > index and market_eq['Symbol'] == equity_symbol['Symbol']:
-                equity_price = market_eq['Last']
-                break
-
-        if option['Type'] != 'Option':
+        if instrument['Type'] != 'Option':
             continue
 
-        K = option['Strike']
+        computed_data = {}
+        K = instrument['Strike']
+
         bid_implied_volatility = calculate_implied_volatility(
-            equity_price, K, 0, T, r, q, option['OptionType'], market['Bid1'])
+            equity_price['Last'], K, 0, T, r, q, instrument['OptionType'], market['Bid1'])
         ask_implied_volatility = calculate_implied_volatility(
-            equity_price, K, 0, T, r, q, option['OptionType'], market['Ask1'])
+            equity_price['Last'], K, 0, T, r, q, instrument['OptionType'], market['Ask1'])
 
         bid_implied_volatility = 'NaN' if np.isnan(
             bid_implied_volatility) else bid_implied_volatility
         ask_implied_volatility = 'NaN' if np.isnan(
             ask_implied_volatility) else ask_implied_volatility
 
-        if option['OptionType'] == 'P':
+        if instrument['OptionType'] == 'P':
             # Calculate Implied Volatility
-            data = {
+            computed_data = {
                 'Strike': K,
                 'BidVolP': bid_implied_volatility,
                 'AskVolP': ask_implied_volatility,
                 'BidVolC': '',
                 'AskVolC': '',
-                'BidQty1': market['BidQty1'],
-                'AskQty1': market['AskQty1'],
+                'Symbol': market['Symbol'],
                 'LocalTime': market['LocalTime'],
             }
-        if option['OptionType'] == 'C':
+        if instrument['OptionType'] == 'C':
             # Calculate Implied Volatility
-            data = {
+            computed_data = {
                 'Strike': K,
                 'BidVolP': '',
                 'AskVolP': '',
                 'BidVolC': bid_implied_volatility,
                 'AskVolC': ask_implied_volatility,
-                'BidQty1': market['BidQty1'],
-                'AskQty1': market['AskQty1'],
+                'Symbol': market['Symbol'],
                 'LocalTime': market['LocalTime'],
             }
 
-        if local_time == '09:30:00':
-            options_31.append(data)
+        implied_volatility.append(computed_data)
 
-        if local_time == '09:31:00':
-            options_32.append(data)
+    return implied_volatility
 
-        if local_time == '09:32:00':
-            options_33.append(data)
 
-    if len(options_31) > 0:
-        with open("31.csv", "w") as f:
-            wr = csv.DictWriter(
-                f, delimiter=",", fieldnames=list(options_31[0].keys()))
-            wr.writeheader()
-            wr.writerows(options_31)
+def create_result_file(result_file_name, iv_data):
+    with open(result_file_name, "w") as f:
+        wr = csv.DictWriter(
+            f, delimiter=",", fieldnames=list(iv_data[0].keys()))
+        wr.writeheader()
+        wr.writerows(iv_data)
 
-    if len(options_32) > 0:
-        with open("32.csv", "w") as f:
-            wr = csv.DictWriter(
-                f, delimiter=",", fieldnames=list(options_32[0].keys()))
-            wr.writeheader()
-            wr.writerows(options_32)
 
-    if len(options_33) > 0:
-        with open("33.csv", "w") as f:
-            wr = csv.DictWriter(
-                f, delimiter=",", fieldnames=list(options_33[0].keys()))
-            wr.writeheader()
-            wr.writerows(options_33)
+def calculate_bid_ask_implied_volatilities_all_instruments():
+    # Compute 09:31:00 Data
+    options_31 = compute_latest_data(
+        market_data, 'LocalTime', '09:31:00', 'Symbol', '510050')
+
+    # Compute 09:32:00 Data
+    options_32 = compute_latest_data(
+        market_data, 'LocalTime', '09:32:00', 'Symbol', '510050')
+
+    # Compute 09:33:00 Data
+    options_33 = compute_latest_data(
+        market_data, 'LocalTime', '09:33:00', 'Symbol', '510050')
+    q = 0.2  # 20%
+    r = 0.04  # 4%
+    # Time to maturity
+    T = (24 - 16) / 365
+
+    iv_31 = compute_implied_volatility(options_31, instruments_data, T, r, q)
+    iv_32 = compute_implied_volatility(options_32, instruments_data, T, r, q)
+    iv_33 = compute_implied_volatility(options_33, instruments_data, T, r, q)
+
+    # Create implied volatility result
+    create_result_file("31.csv", iv_31)
+    create_result_file("32.csv", iv_32)
+    create_result_file("33.csv", iv_33)
 
     return None
 
