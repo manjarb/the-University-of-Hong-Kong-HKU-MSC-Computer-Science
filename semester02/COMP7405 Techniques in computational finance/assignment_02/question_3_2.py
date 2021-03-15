@@ -1,6 +1,8 @@
 import csv
 import numpy as np
+import pandas as pd
 from datetime import datetime
+import matplotlib.pyplot as plt
 from question_3_1 import calculate_implied_volatility
 
 market_data = []
@@ -56,7 +58,7 @@ with open('./marketdata.csv') as csv_file:
 # Put your results in three separate csv files
 # using the names "31.csv", "32.csv", and "33.csv"
 # (this is to make our tutor's life easier, thank you).
-# The csv les should have the following format:
+# The csv files should have the following format:
 # ----------------------------------------------
 # Strike | BidVolP | AskVolP | BidVolC | AskVolC
 #   1.9  |  ....   |  ....   |  ....   |  ....
@@ -173,7 +175,83 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
     create_result_file("32.csv", iv_32)
     create_result_file("33.csv", iv_33)
 
-    return None
+    return iv_31, iv_32, iv_33
 
 
-calculate_bid_ask_implied_volatilities_all_instruments()
+iv_31, iv_32, iv_33 = calculate_bid_ask_implied_volatilities_all_instruments()
+
+# (3.2.2)
+# Put the results into three dierent plots one for each time point.
+# For each plot, the x-axis should be the strike levels,
+# and the y-axis should be implied volatilities.
+
+
+def compute_x_y(iv_data):
+    x = []
+    y = []
+    for iv in iv_data:
+        x.append(iv['Strike'])
+
+        vola = 0
+        counter = 0
+        if iv['BidVolP'] != '' and iv['BidVolP'] != 'NaN':
+            vola += iv['BidVolP']
+            counter += 1
+
+        if iv['AskVolP'] != '' and iv['AskVolP'] != 'NaN':
+            vola += iv['AskVolP']
+            counter += 1
+
+        if iv['BidVolC'] != '' and iv['BidVolC'] != 'NaN':
+            vola += iv['BidVolC']
+            counter += 1
+
+        if iv['AskVolC'] != '' and iv['AskVolC'] != 'NaN':
+            vola += iv['AskVolC']
+            counter += 1
+
+        if (counter != 0):
+            vola = vola / counter
+
+        y.append(vola)
+
+    return x, y
+
+
+def plot_iv_data(iv_31, iv_32, iv_33):
+    x_31, y_31 = compute_x_y(iv_31)
+    x_32, y_32 = compute_x_y(iv_32)
+    x_33, y_33 = compute_x_y(iv_33)
+
+    # For 31.csv
+    plt.plot(x_31, y_31)
+    # naming the x-axis 
+    plt.xlabel('Strike Level') 
+    # naming the y-axis 
+    plt.ylabel('Implied volatilities.') 
+    # plot title 
+    plt.title('31.csv Data') 
+    plt.show()
+
+    # For 32.csv
+    plt.plot(x_32, y_32)
+    # naming the x-axis 
+    plt.xlabel('Strike Level') 
+    # naming the y-axis 
+    plt.ylabel('Implied volatilities.') 
+    # plot title 
+    plt.title('32.csv Data') 
+    plt.show()
+
+    # For 33.csv
+    plt.plot(x_33, y_33)
+    # naming the x-axis 
+    plt.xlabel('Strike Level') 
+    # naming the y-axis 
+    plt.ylabel('Implied volatilities.') 
+    # plot title 
+    plt.title('33.csv Data') 
+    plt.show()
+
+
+plot_iv_data(iv_31, iv_32, iv_33)

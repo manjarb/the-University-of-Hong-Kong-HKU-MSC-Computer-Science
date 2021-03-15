@@ -1,6 +1,5 @@
 import csv
 import numpy as np
-import pandas as pd
 from datetime import datetime
 from question_1 import black_scholes_call, black_scholes_put
 
@@ -40,7 +39,7 @@ q = 0.2  # 20%
 # have learned so far, check whether you see any arbitrage opportunities in
 # the data. You can consider two cases: one without any transaction cost, and
 # the other one with the real transaction cost. You can assume there is no
-# transaction cost for A50ETF. Write down your ndings and submit them.
+# transaction cost for A50ETF. Write down your findings and submit them.
 
 
 def call_put_parity(S, K, t, T, r, q):

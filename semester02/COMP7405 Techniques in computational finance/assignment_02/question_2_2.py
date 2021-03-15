@@ -33,7 +33,7 @@ def correlated_normal_random_variables():
     # (c) generate the samples of Z using the formula and the samples of X and Y .
     Z_list = [generate_Z(snr[0], snr[1]) for snr in snr_list]
 
-    # (d) calculate the sample correlation coecient ρ(X,Z) based on the samples
+    # (d) calculate the sample correlation coefficient ρ(X,Z) based on the samples
     # of X and Z, and compare it with the theoretical value 0.5.
     X_list = snr_list[:, 0]
 
