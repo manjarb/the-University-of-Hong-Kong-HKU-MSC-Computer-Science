@@ -1,0 +1,210 @@
+Equity 510050 at: 2016-Feb-16 09:30:04.520358
+Without Transaction cost
+Portfolio A: 2.0983792311040372
+Portfolio B: 1.951456550880307
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:09.587622
+Without Transaction cost
+Portfolio A: 1.9600295278877207
+Portfolio B: 1.9691259088059465
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:14.591004
+Without Transaction cost
+Portfolio A: 2.1481324145450515
+Portfolio B: 1.9691259088059465
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:19.560765
+Without Transaction cost
+Portfolio A: 1.9632180168490452
+Portfolio B: 1.9546494138094925
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:24.641089
+Without Transaction cost
+Portfolio A: 1.9771162866168404
+Portfolio B: 1.950959207062523
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:29.631013
+Without Transaction cost
+Portfolio A: 1.9640792353729952
+Portfolio B: 1.951456550880307
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:34.698456
+Without Transaction cost
+Portfolio A: 1.9590313246078548
+Portfolio B: 1.9685476835772877
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:39.675425
+Without Transaction cost
+Portfolio A: 1.9632180168490452
+Portfolio B: 1.9685476835772877
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:44.746451
+Without Transaction cost
+Portfolio A: 1.9615072038776593
+Portfolio B: 1.9484753732585354
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:49.732882
+Without Transaction cost
+Portfolio A: 2.007051577260538
+Portfolio B: 1.9546494138094925
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:54.724653
+Without Transaction cost
+Portfolio A: 1.9580332230131245
+Portfolio B: 1.9679761998561436
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:30:59.765946
+Without Transaction cost
+Portfolio A: 1.9580332230131245
+Portfolio B: 1.9494689939414327
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:04.765544
+Without Transaction cost
+Portfolio A: 1.957035228362366
+Portfolio B: 1.952947348773829
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:09.865762
+Without Transaction cost
+Portfolio A: 1.9590313246078548
+Portfolio B: 1.9546494138094925
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:14.821262
+Without Transaction cost
+Portfolio A: 1.9580332230131245
+Portfolio B: 1.9537964194108959
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:19.801187
+Without Transaction cost
+Portfolio A: 1.9615072038776593
+Portfolio B: 1.952947348773829
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:24.801608
+Without Transaction cost
+Portfolio A: 1.9615072038776593
+Portfolio B: 1.9674114833724583
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:29.852563
+Without Transaction cost
+Portfolio A: 1.9560373461558171
+Portfolio B: 2.139573245259623
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:34.849650
+Without Transaction cost
+Portfolio A: 1.9585522734594123
+Portfolio B: 1.9494689939414327
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:39.930647
+Without Transaction cost
+Portfolio A: 2.1481295690748246
+Portfolio B: 1.952947348773829
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:44.908538
+Without Transaction cost
+Portfolio A: 1.957035228362366
+Portfolio B: 1.9484753732585354
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:49.882024
+Without Transaction cost
+Portfolio A: 1.9585522734594123
+Portfolio B: 1.9679761998561436
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:54.837643
+Without Transaction cost
+Portfolio A: 1.9606577568942747
+Portfolio B: 1.9474818650198475
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:31:59.935368
+Without Transaction cost
+Portfolio A: 1.9606577568942747
+Portfolio B: 1.997752220218177
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:04.992453
+Without Transaction cost
+Portfolio A: 1.955039582144415
+Portfolio B: 1.9512612744403928
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:09.877191
+Without Transaction cost
+Portfolio A: 1.9560373461558171
+Portfolio B: 1.9521022757583049
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:14.936166
+Without Transaction cost
+Portfolio A: 1.9765404289278352
+Portfolio B: 1.9494689939414327
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:20.032478
+Without Transaction cost
+Portfolio A: 1.9623606484825875
+Portfolio B: 1.9537964194108959
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:25.002629
+Without Transaction cost
+Portfolio A: 1.9590313246078548
+Portfolio B: 1.9546494138094925
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:29.991008
+Without Transaction cost
+Portfolio A: 1.9771162866168404
+Portfolio B: 1.9546494138094925
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:35.061747
+Without Transaction cost
+Portfolio A: 1.9623606484825875
+Portfolio B: 1.9679761998561436
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:40.038588
+Without Transaction cost
+Portfolio A: 2.148130462772213
+Portfolio B: 1.9679761998561436
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:45.100994
+Without Transaction cost
+Portfolio A: 1.9623606484825875
+Portfolio B: 1.9679761998561436
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:50.067310
+Without Transaction cost
+Portfolio A: 1.9765404289278352
+Portfolio B: 2.0412949321062444
+Portfolio A < Portfolio B: So we should Buy Portfolio B and Sell Portfolio A
+--------------------------------------------------
+Equity 510050 at: 2016-Feb-16 09:32:55.065505
+Without Transaction cost
+Portfolio A: 1.9580332230131245
+Portfolio B: 1.9537964194108959
+Portfolio A > Portfolio B: So we should Buy Portfolio A and Sell Portfolio B
+--------------------------------------------------
