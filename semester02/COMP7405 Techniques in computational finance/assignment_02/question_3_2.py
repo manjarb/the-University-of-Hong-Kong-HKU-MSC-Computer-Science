@@ -181,7 +181,7 @@ def calculate_bid_ask_implied_volatilities_all_instruments():
 iv_31, iv_32, iv_33 = calculate_bid_ask_implied_volatilities_all_instruments()
 
 # (3.2.2)
-# Put the results into three dierent plots one for each time point.
+# Put the results into three different plots one for each time point.
 # For each plot, the x-axis should be the strike levels,
 # and the y-axis should be implied volatilities.
 
